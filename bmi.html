@@ -118,7 +118,7 @@ button:hover {
         <input type="number" id="weight" placeholder="Enter your weight">
       </div>
 
-      <button type="button">Calculate BMI</button>
+      <button type="submit">Calculate BMI</button>
     </form>
 
     <div class="result-box">
@@ -129,4 +129,15 @@ button:hover {
   </div>
 
 </body>
+
+<script>
+    document.querySelector("form").addEventListener("submit",(e)=>{
+        e.preventDefault();
+        let fheight=parseFloat(document.getElementById("height").value).toFixed(2)
+        let fweight=parseFloat(document.getElementById("weight").value).toFixed(2)
+        let final=parseFloat(fweight/((fheight/100)*(fheight/100))).toFixed(2)
+        document.querySelector(".bmi-value").innerHTML=final
+    })
+
+</script>
 </html>
