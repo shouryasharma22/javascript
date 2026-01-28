@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Number Guesser</title>
+<style>* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #141e30, #243b55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Game card */
+.game {
+  width: 340px;
+  max-width: 90vw;
+  padding: 32px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.55);
+  text-align: center;
+}
+
+/* Title */
+.game h1 {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+/* Hint text */
+.hint {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 22px;
+}
+
+/* Guess input */
+#guess {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  font-size: 1.1rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+/* Placeholder */
+#guess::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Button */
+button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  background: #4facfe;
+  color: #06224a;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(79, 172, 254, 0.45);
+}
+
+/* Feedback box */
+.feedback {
+  margin-top: 22px;
+  padding: 16px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* Message text */
+#message {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+/* Attempts counter */
+.attempts {
+  margin-top: 14px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Mobile safety */
+@media (max-width: 360px) {
+  .game {
+    padding: 24px;
+  }
+
+  #guess {
+    font-size: 1rem;
+    padding: 12px;
+  }
+}
+</style>
+</head>
+<body>
+
+  <div class="game">
+    <h1>Guess the Number</h1>
+    <p class="hint">Enter a number between 1 and 100</p>
+
+    <input
+      type="number"
+      id="guess"
+      placeholder="Your guess"
+    />
+
+    <button id="check">Check</button>
+
+    <div class="feedback">
+      <span id="message">—</span>
+    </div>
+
+    <div class="attempts">
+      Attempts: <span id="tries">0</span>
+    </div>
+  </div>
+
+</body>
+</html>
