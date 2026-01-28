@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Color Picker</title>
+  <style>* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f4f4;
+}
+
+.picker-container {
+  display: flex;
+  gap: 20px;
+}
+
+.color-box {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 2px solid #333;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Hover effect only (no color switching) */
+.color-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+/* Colors */
+#red {
+  background-color: #e74c3c;
+}
+
+#blue {
+  background-color: #3498db;
+}
+
+#green {
+  background-color: #2ecc71;
+}
+
+#yellow {
+  background-color: #f1c40f;
+}
+</style>
+</head>
+<body>
+
+  <div class="picker-container">
+    <div class="color-box" id="red" data-color="red"></div>
+    <div class="color-box" id="blue" data-color="blue"></div>
+    <div class="color-box" id="green" data-color="green"></div>
+    <div class="color-box" id="yellow" data-color="yellow"></div>
+  </div>
+  <script>
+    document.querySelectorAll(".color-box").forEach((box)=>{box.addEventListener("click",(e)=>{
+            document.body.style.backgroundColor=e.target.id;
+    })})
+
+
+
+  </script>
+</body>
+</html>
