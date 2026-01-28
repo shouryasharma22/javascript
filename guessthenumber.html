@@ -144,77 +144,86 @@
     </div>
   </body>
   <script>
-    let count;
-    let guesses=[]
-    let c=parseInt(Math.random()*100)
-    document.getElementById("form").addEventListener("submit", (e) => {
-      document.getElementById("guess").placeholder=""
-      e.preventDefault();
-      let val=document.getElementById("guess").value
-      if (parseInt(document.getElementById("guess").value) ===c){
-        document.querySelector("#message").innerHTML =          "You guessed the CORRECT number!";
-                document.querySelector(".feedback").style.backgroundColor="green";
+ let count = 10; // Use 'count' consistently since your HTML uses it
+  let guesses = [];
+  let c = Math.floor(Math.random() * 100) + 1;
+
+  document.getElementById("form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    let val = document.getElementById("guess").value;
+    let userNum = parseInt(val);
+
+    // Update History
+    guesses.push(val);
+    document.getElementById("prevguess").innerHTML = `Previous Guesses: ${guesses.join(", ")}`;
+    document.getElementById("guess").value = "";
+
+    // Win Logic
+    if (userNum === c) {
+      document.querySelector("#message").innerHTML = "You guessed the CORRECT number!";
+      document.querySelector(".feedback").style.backgroundColor = "green";
+      endGame();
+    } 
+    // Lose Logic
+    else {
+      count--;
+      document.querySelector("#tries").innerHTML = count;
+      document.querySelector(".feedback").style.backgroundColor = "red";
+      document.querySelector("#message").innerHTML = userNum > c ? "Go lower" : "Go higher";
+
+      if (count === 0) {
+        document.querySelector("#message").innerHTML = `Game Over! The number was ${c}`;
+        endGame();
       }
-      else if(parseInt(document.getElementById("guess").value) >=c) {document.querySelector("#message").innerHTML = "Go lower";
-        document.querySelector(".feedback").style.backgroundColor="red";
-      count=parseInt(document.querySelector("#tries").innerHTML)
-        count=count-1;
-        document.querySelector("#tries").innerHTML=count
-      }
-        else if(parseInt(document.getElementById("guess").value) <=c) {document.querySelector("#message").innerHTML = "Go higher";
-        document.querySelector(".feedback").style.backgroundColor="red";
-        count=parseInt(document.querySelector("#tries").innerHTML)
-        count=count-1;
-        document.querySelector("#tries").innerHTML=count
-      }
-      if(count===0) {document.querySelector(".game").innerHTML=`The correct number was ${c} <br> <br>You did not find the number in 10 attempts <br> <br>Reload page to try again`
-      document.querySelector(".game").style.backgroundColor="red"
-         function showResetButton() {
-  const btn = document.createElement("button"); 
-  btn.id="impbutton"
-  btn.innerHTML = "Start New Game";           
-  btn.onclick = resetGame;                     
-  document.querySelector(".game").appendChild(btn); 
-}
-showResetButton();
     }
-    guesses.push(val)
-    document.getElementById("prevguess").innerHTML=`Previous Guesses-${guesses}`
-    document.getElementById("guess").value=""
+  });
 
-    });
+  function showResetButton() {
+    // Only create it if it doesn't exist
+    if (document.getElementById("impbutton")) return;
 
+    const btn = document.createElement("button");
+    btn.id = "impbutton"; // CORRECTED: No hashtag here
+    btn.innerHTML = "Start New Game";
+    btn.style.marginTop = "20px";
+    btn.style.backgroundColor = "#2ecc71";
+    btn.onclick = resetGame;
+    document.querySelector(".game").appendChild(btn);
+  }
 
-    // add an option to "start a new game" 
-  // We do this by making a button and on pressing it, the appearance of the website becomes the same as it was in the start by making the html code same as the start and a new number is generated
- 
-function resetGame() {
- 
+  function resetGame() {
+    // 1. Reset Logic
     c = Math.floor(Math.random() * 100) + 1;
     guesses = [];
-    attemptsLeft = 10;
+    count = 10;
 
-  document.body.innerHTML= `<div class="game">
-      <h1>Guess the Number</h1>
-      <p class="hint">Enter a number between 1 and 100</p>
-      <form id="form">
-        <input type="number" id="guess" placeholder="Your guess" />
+    // 2. Unlock UI
+    document.getElementById("guess").disabled = false;
+    document.getElementById("submit").disabled = false;
+    document.getElementById("submit").style.opacity = "1";
+    document.getElementById("submit").style.cursor = "pointer";
 
-        <button type="submit" id="submit">Check</button>
-      </form>
-      <div id="prevguess">
-        Previous Guesses-
-      </div>
-      <div class="feedback">
-        <span id="message">—</span>
-      </div>
-
-      <div class="attempts">Attempts Left: <span id="tries">10</span></div>
-    </div>`
-
+    // 3. Reset Text
+    document.getElementById("message").innerHTML = "—";
+    document.getElementById("tries").innerHTML = "10";
+    document.getElementById("prevguess").innerHTML = "Previous Guesses-";
+    document.querySelector(".feedback").style.backgroundColor = "rgba(0, 0, 0, 0.35)";
+    
+    // 4. Remove the button
     const btn = document.getElementById("impbutton");
     if (btn) btn.remove();
-}
+    
+    document.getElementById("guess").focus();
+  }
+
+  function endGame() {
+    document.getElementById("guess").disabled = true;
+    const submitBtn = document.getElementById("submit");
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = "0.5";
+    submitBtn.style.cursor = "not-allowed";
+    showResetButton();
+  }
   </script>
 </html>
 
