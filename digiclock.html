@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Digital Clock UI</title>
+  <style>* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: radial-gradient(circle at top, #1b1b1b, #0b0b0b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clock-container {
+  padding: 40px 60px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.clock {
+  color: #ffffff;
+  font-size: 5rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+}
+
+@media (max-width: 600px) {
+  .clock {
+    font-size: 3rem;
+  }
+}
+</style>
+</head>
+<body>
+
+  <div class="clock-container">
+    <div class="clock">
+      <span id="time">--:--</span>
+    </div>
+  </div>
+</body>
+<script>
+    setInterval(()=>{
+    let date=new Date()
+    document.getElementById("time").innerHTML=date.toLocaleTimeString()
+},1000
+)
+</script>
+</html>
