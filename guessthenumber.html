@@ -122,14 +122,14 @@ button:hover {
   <div class="game">
     <h1>Guess the Number</h1>
     <p class="hint">Enter a number between 1 and 100</p>
-
+<form  id="form">
     <input
       type="number"
       id="guess"
       placeholder="Your guess"
     />
 
-    <button id="check">Check</button>
+    <button id="submit">Check</button>
 
     <div class="feedback">
       <span id="message">—</span>
@@ -138,7 +138,15 @@ button:hover {
     <div class="attempts">
       Attempts Left: <span id="tries">10</span>
     </div>
+    </form>
   </div>
 
 </body>
+<script>
+    document.getElementById("form").addEventListener("click",(e)=>{
+    if(parseInt(document.getElementById("guess").value)===(Math.random()*100)) document.querySelector(".feedback").innerHTML="You guessed the CORRECT number!"
+    else document.querySelector(".feedback").innerHTML="Try Again"
+
+    })
+</script>
 </html>
