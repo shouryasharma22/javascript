@@ -99,6 +99,9 @@
         font-weight: 500;
         color: #ffffff;
       }
+      #prevguess{
+        color:white;
+      }
 
       /* Attempts counter */
       .attempts {
@@ -130,6 +133,9 @@
 
         <button type="submit" id="submit">Check</button>
       </form>
+      <div id="prevguess">
+        Previous Guesses-
+      </div>
       <div class="feedback">
         <span id="message">—</span>
       </div>
@@ -139,9 +145,12 @@
   </body>
   <script>
     let count;
+    let guesses=[]
+    let c=parseInt(Math.random()*100)
     document.getElementById("form").addEventListener("submit", (e) => {
+      document.getElementById("guess").placeholder=""
       e.preventDefault();
-      let c=parseInt(Math.random()*100)
+      let val=document.getElementById("guess").value
       if (parseInt(document.getElementById("guess").value) ===c){
         document.querySelector("#message").innerHTML =          "You guessed the CORRECT number!";
                 document.querySelector(".feedback").style.backgroundColor="green";
@@ -160,13 +169,56 @@
       }
       if(count===0) {document.querySelector(".game").innerHTML=`The correct number was ${c} <br> <br>You did not find the number in 10 attempts <br> <br>Reload page to try again`
       document.querySelector(".game").style.backgroundColor="red"
-      
+         function showResetButton() {
+  const btn = document.createElement("button"); 
+  btn.id="impbutton"
+  btn.innerHTML = "Start New Game";           
+  btn.onclick = resetGame;                     
+  document.querySelector(".game").appendChild(btn); 
+}
+showResetButton();
     }
+    guesses.push(val)
+    document.getElementById("prevguess").innerHTML=`Previous Guesses-${guesses}`
+    document.getElementById("guess").value=""
 
     });
+
+
+    // add an option to "start a new game" 
+  // We do this by making a button and on pressing it, the appearance of the website becomes the same as it was in the start by making the html code same as the start and a new number is generated
+ 
+function resetGame() {
+ 
+    c = Math.floor(Math.random() * 100) + 1;
+    guesses = [];
+    attemptsLeft = 10;
+
+  document.body.innerHTML= `<div class="game">
+      <h1>Guess the Number</h1>
+      <p class="hint">Enter a number between 1 and 100</p>
+      <form id="form">
+        <input type="number" id="guess" placeholder="Your guess" />
+
+        <button type="submit" id="submit">Check</button>
+      </form>
+      <div id="prevguess">
+        Previous Guesses-
+      </div>
+      <div class="feedback">
+        <span id="message">—</span>
+      </div>
+
+      <div class="attempts">Attempts Left: <span id="tries">10</span></div>
+    </div>`
+
+    const btn = document.getElementById("impbutton");
+    if (btn) btn.remove();
+}
   </script>
 </html>
 
-<!-- Add a list of number entered -->
- <!-- add an option to "start a new game" -->
-  <!-- When I submit an option, the new input area should be empty -->
+ <!-- add an option to "start a new game" 
+  We do this by making a button and on pressing it, the appearance of the website becomes the same as it was in the start by making the html code same as the start and a new number is generated-->
+
+
