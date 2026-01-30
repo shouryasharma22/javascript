@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather App UI</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #74ebd5, #9face6);
+      padding: 20px;
+    }
+
+    /* UPDATED CARD COLOR */
+    .weather-app {
+      width: 100%;
+      max-width: 380px;
+      background: linear-gradient(
+        180deg,
+        rgba(97, 36, 194, 0.35),
+        rgba(21, 4, 91, 0.15)
+      );
+      backdrop-filter: blur(18px);
+      border-radius: 20px;
+      padding: 24px;
+      color: #fff;
+      box-shadow: 
+        0 20px 40px rgba(0,0,0,0.2),
+        inset 0 0 0 1px rgba(255,255,255,0.25);
+    }
+
+    .search {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .search input {
+      flex: 1;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .search button {
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      background: #ffffff;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .current-weather {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .current-weather img {
+      width: 90px;
+      margin-bottom: 10px;
+    }
+
+    .temperature {
+      font-size: 48px;
+      font-weight: 700;
+    }
+
+    .description {
+      font-size: 16px;
+      opacity: 0.9;
+      margin-bottom: 6px;
+      text-transform: capitalize;
+    }
+
+    .location {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .details {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .detail-card {
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 14px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .detail-card span {
+      display: block;
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .detail-card strong {
+      font-size: 16px;
+      font-weight: 600;
+      margin-top: 4px;
+      display: block;
+    }
+
+    .forecast {
+      margin-top: 28px;
+    }
+
+    .forecast h3 {
+      font-size: 14px;
+      margin-bottom: 12px;
+      opacity: 0.9;
+    }
+
+    .forecast-list {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .forecast-item {
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 14px;
+      padding: 10px;
+      width: 60px;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .forecast-item img {
+      width: 30px;
+      margin: 6px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="weather-app">
+
+    <!-- Search -->
+    <div class="search">
+      <input type="text" placeholder="Search city..." id="cityInput">
+      <button id="searchBtn">Go</button>
+    </div>
+
+    <!-- Current Weather -->
+    <div class="current-weather">
+      <img src="https://openweathermap.org/img/wn/01d@2x.png" alt="Weather Icon" id="weatherIcon">
+      <div class="temperature" id="temp">24°</div>
+      <div class="description" id="description">Sunny</div>
+      <div class="location" id="location">New York, US</div>
+    </div>
+
+    <!-- Details -->
+    <div class="details">
+      <div class="detail-card">
+        <span>Humidity</span>
+        <strong id="humidity">60%</strong>
+      </div>
+      <div class="detail-card">
+        <span>Wind</span>
+        <strong id="wind">12 km/h</strong>
+      </div>
+      <div class="detail-card">
+        <span>Feels Like</span>
+        <strong id="feelsLike">26°</strong>
+      </div>
+    </div>
+
+    <!-- Forecast -->
+    <div class="forecast">
+      <h3>Next Hours</h3>
+      <div class="forecast-list">
+        <div class="forecast-item">
+          <div>12 PM</div>
+          <img src="https://openweathermap.org/img/wn/02d.png">
+          <div>25°</div>
+        </div>
+        <div class="forecast-item">
+          <div>3 PM</div>
+          <img src="https://openweathermap.org/img/wn/03d.png">
+          <div>23°</div>
+        </div>
+        <div class="forecast-item">
+          <div>6 PM</div>
+          <img src="https://openweathermap.org/img/wn/10d.png">
+          <div>21°</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
